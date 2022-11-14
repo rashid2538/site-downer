@@ -15,21 +15,9 @@ export class Terminator {
         }
 
         this.workers.forEach((worker:Worker, i:number) => {
-            worker.on('message', this.log.bind(this, {
-                get time() {
-                    return new Date();
-                }
-            }, `Worker-${i}-MESSAGE: `));
-            worker.on('error', this.error.bind(this, {
-                get time() {
-                    return new Date();
-                }
-            }, `Worker-${i}-ERROR: `));
-            worker.on('exit', this.log.bind(this, {
-                get time() {
-                    return new Date();
-                }
-            }, `Worker-${i}-EXIT`));
+            worker.on('message', this.log.bind(this, `Worker-${i}-MESSAGE: `));
+            worker.on('error', this.error.bind(this, `Worker-${i}-ERROR: `));
+            worker.on('exit', this.log.bind(this, `Worker-${i}-EXIT`));
         });
     }
 
