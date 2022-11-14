@@ -4,13 +4,10 @@ export class Terminator {
 
     private workers:Worker[] = [];
 
-    constructor(numberOfThreads:number, url:string, concurrency:number) {
+    constructor(numberOfThreads:number, url:string, concurrency:number, userAgent:string) {
         for(let i = 0; i < numberOfThreads; i++) {
             this.workers.push(new Worker('./lib/worker.js', {
-                workerData: {
-                    url: url,
-                    concurrency: concurrency,
-                }
+                workerData: { url, concurrency, userAgent }
             }));
         }
 
